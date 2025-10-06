@@ -166,7 +166,10 @@ export default function AdminMap(): JSX.Element {
   // --- Initialize socket safely ---
   useEffect(() => {
     if (!socketRef.current) {
-      socketRef.current = io(BACKEND_URL, { autoConnect: true });
+      socketRef.current = io(BACKEND_URL, {
+      transports: ["websocket", "polling"],
+      withCredentials: true,
+    });
     }
 
     const socket = socketRef.current;
